@@ -29,7 +29,7 @@
                         <div class="user-panel">
                             <div class="up-item">
                                 <i class="flaticon-profile"></i>
-                                <a href="#">Sign</a> In or <a href="#">Create Account</a>
+                                <a href="/customer">Sign</a> In or <a href="/customer/daftar">Create Account</a>
                             </div>
                             <div class="up-item">
                                 <div class="shopping-card">
@@ -47,8 +47,8 @@
             <div class="container">
                 <!-- menu -->
                 <ul class="main-menu">
-                    <li><a href="./index.html">Home</a></li>
-                    <li><a href="./product.html">Product</a></li>
+                    <li><a href="./">Home</a></li>
+                    <li><a href="./product">Product</a></li>
                     <li><a href="./contact.html">Contact Us</a></li>
                     <li><a href="./about.html">About Us</a></li>
                 </ul>

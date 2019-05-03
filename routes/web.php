@@ -15,4 +15,18 @@ Route::get('/', 'IndexController@index', function () {
     return view('index');
 });
 
+Route::get('/product', function (){
+    return view('product');
+});
+Route::group([
+    'prefix' => 'customer',
+     'as' => 'customer.'
+    ], function (){
+    Route::get('/login', function (){
+        return view('customer.index');
+    });
+    Route::get('/daftar', function (){
+        return view('customer.daftar');
 
+    });
+});
