@@ -13,4 +13,11 @@ class IndexController extends Controller
 
         return view('index', ['Barang' => $Barang]);
     }
+    public function product($id){
+    	$Barang = Barang::find($id);
+    	if (!$Barang) {
+    		echo "Mau ngapain Gan !";
+    	}
+    	else return view('product', ['Barang' => $Barang]);
+    }
 }

@@ -11,22 +11,10 @@
 |
 */
 
-Route::get('/', 'IndexController@index', function () {
-    return view('index');
-});
+Route::get('/',  'IndexController@index');
 
-Route::get('/product', function (){
-    return view('product');
-});
-Route::group([
-    'prefix' => 'customer',
-     'as' => 'customer.'
-    ], function (){
-    Route::get('/login', function (){
-        return view('customer.index');
-    });
-    Route::get('/daftar', function (){
-        return view('customer.daftar');
+Route::get('/product/{id}', 'IndexController@product');
 
-    });
-});
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -29,7 +29,7 @@
                         <div class="user-panel">
                             <div class="up-item">
                                 <i class="flaticon-profile"></i>
-                                <a href="/customer">Sign</a> In or <a href="/customer/daftar">Create Account</a>
+                                <a href="/customer/login">Sign</a> In or <a href="/customer/daftar">Create Account</a>
                             </div>
                             <div class="up-item">
                                 <div class="shopping-card">
@@ -48,7 +48,6 @@
                 <!-- menu -->
                 <ul class="main-menu">
                     <li><a href="./">Home</a></li>
-                    <li><a href="./product">Product</a></li>
                     <li><a href="./contact.html">Contact Us</a></li>
                     <li><a href="./about.html">About Us</a></li>
                 </ul>
@@ -150,15 +149,15 @@
                 @foreach($Barang as $n)
                 <div class="product-item">
                     <div class="pi-pic">
-                        <img src="{{ $n->image }}" alt="">
+                        <a href="/product/{{$n->id_barang}}"><img src="{{ $n->image }}" alt=""></a>
                         <div class="pi-links">
                             <a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
                             <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
                         </div>
                     </div>
                     <div class="pi-text">
-                        <h6>$35,00</h6>
-                        <p>{{ $n->namabarang }} </p>
+                        <h6>Rp {{ $n->harga }}</h6>
+                        <a href="/product/{{$n->id_barang}}"><p>{{ $n->namabarang }} </p>
                     </div>
                 </div>
                 @endforeach
@@ -179,7 +178,7 @@
                 <div class="col-lg-3 col-sm-6">
                     <div class="product-item">
                         <div class="pi-pic">
-                            <img src="{{ $b->image }}" alt="">
+                            <a href="/product/{{$n->id_barang}}"><img src="{{ $b->image }}" alt=""></a>
                             <div class="pi-links">
                                 <a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
                                 <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
@@ -187,7 +186,7 @@
                         </div>
                         <div class="pi-text">
                             <h6>Rp {{ $b->harga }}</h6>
-                            <p>{{ $b->namabarang }} </p>
+                            <a href="/product/{{$n->id_barang}}"><p>{{ $b->namabarang }} </p></a>
                         </div>
                     </div>
                 </div>
