@@ -16,8 +16,8 @@
                 <div class="row">
                     <div class="col-lg-2 text-center text-lg-left">
                         <!-- logo -->
-                        <a href="./index.html" class="site-logo">
-                            <img src="img/logogocamp.png" alt="">
+                        <a href="/" class="site-logo">
+                            <img src="{{ url('img/logogocamp.png') }}" alt="">
                         </a>
                     </div>
                     <div class="col-xl-6 col-lg-5">
@@ -28,16 +28,24 @@
                     </div>
                     <div class="col-xl-4 col-lg-5">
                         <div class="user-panel">
+                        @if (Route::has('login'))
                             <div class="up-item">
                                 <i class="flaticon-profile"></i>
-                                <a href="#">Sign</a> In or <a href="#">Create Account</a>
+                                @auth
+                                <a href="/home"> {{ Auth::user()->nama }}</a>
+                                @else
+                                <a href="{{ route('login') }}">Sign</a> In or <a href="{{ route('register') }}">Create Account</a>
+                                @endauth
                             </div>
+                        @endif
                             <div class="up-item">
                                 <div class="shopping-card">
                                     <i class="flaticon-bag"></i>
-                                    <span>0</span>
+                                    <span><?php if(null !== session('cart')){ echo count(session('cart'));}
+                                    else echo "0";
+                                     ?></span>
                                 </div>
-                                <a href="./cart.html">Shopping Cart</a>
+                                <a href="{{ url('cart') }}">Shopping Cart</a>
                             </div>
                         </div>
                     </div>
@@ -48,8 +56,7 @@
             <div class="container">
                 <!-- menu -->
                 <ul class="main-menu">
-                    <li><a href="./">Home</a></li>
-                    <li><a href="./">Product</a></li>
+                    <li><a href="../">Home</a></li>
                     <li><a href="./contact.html">Contact Us</a></li>
                     <li><a href="./about.html">About Us</a></li>
                 </ul>
@@ -57,7 +64,6 @@
         </nav>
     </header>
     <!-- Header section end -->
-
 
     <!-- Page info -->
     <div class="page-top-info">
@@ -81,11 +87,11 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="product-pic-zoom">
-                        <img style="" class="product-big-img" src="{{ $Barang->image }}" alt="">
+                        <img style="" class="product-big-img" src="{{ asset('storage/product/'.$Barang->image) }}" alt="">
                     </div>
                     <div class="product-thumbs" tabindex="1" style="overflow: hidden; outline: none;">
                         <div class="product-thumbs-track">
-                            <div class="pt active" data-imgbigurl="img/single-product/1.jpg"><img src="{{ $Barang->image }}" alt=""></div>
+                            <div class="pt active" data-imgbigurl="img/single-product/1.jpg"><img src="{{ asset('storage/product/'.$Barang->image) }}" alt=""></div>
                         </div>
                     </div>
                 </div>
@@ -114,7 +120,7 @@
                         <p>Quantity</p>
                         <div class="pro-qty"><input type="text" value="1"></div>
                     </div>
-                    <a href="#" class="site-btn">SHOP NOW</a>
+                    <a href="{{ url('addtocart/'.$Barang->id_barang) }}" class="site-btn">ADD TO CART</a>
                     <div id="accordion" class="accordion-area">
                         <div class="panel">
                             <div class="panel-header" id="headingOne">

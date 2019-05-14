@@ -3,6 +3,11 @@
 @section('title','GOCAMP')
 
 @section('content')
+@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
     <!-- Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
@@ -15,7 +20,7 @@
                 <div class="row">
                     <div class="col-lg-2 text-center text-lg-left">
                         <!-- logo -->
-                        <a href="./index.html" class="site-logo">
+                        <a href="/" class="site-logo">
                             <img src="img/logogocamp.png" alt="">
                         </a>
                     </div>
@@ -27,16 +32,24 @@
                     </div>
                     <div class="col-xl-4 col-lg-5">
                         <div class="user-panel">
+                        @if (Route::has('login'))
                             <div class="up-item">
                                 <i class="flaticon-profile"></i>
-                                <a href="/customer/login">Sign</a> In or <a href="/customer/daftar">Create Account</a>
+                                @auth
+                                <a href="/home"> {{ Auth::user()->nama }}</a>
+                                @else
+                                <a href="{{ route('login') }}">Sign</a> In or <a href="{{ route('register') }}">Create Account</a>
+                                @endauth
                             </div>
+                        @endif
                             <div class="up-item">
                                 <div class="shopping-card">
                                     <i class="flaticon-bag"></i>
-                                    <span>0</span>
+                                    <span><?php if(null !== session('cart')){ echo count(session('cart'));}
+                                    else echo "0";
+                                     ?></span>
                                 </div>
-                                <a href="./cart.html">Shopping Cart</a>
+                                <a href="{{ url('cart') }}">Shopping Cart</a>
                             </div>
                         </div>
                     </div>
@@ -91,7 +104,7 @@
                             <h2>HAMMOCK</h2>
                             <p>Dapatkan harga khusus dengan diskon hingga 50%.</p>
                             <a href="#" class="site-btn sb-line">DISCOVER</a>
-                            <a href="#" class="site-btn sb-white">ADD TO CART</a>
+                            <a href="" class="site-btn sb-white">ADD TO CART</a>
                         </div>
                     </div>
                 </div>
@@ -140,7 +153,7 @@
 
 
     <!-- letest product section -->
-    <section class="top-letest-product-section">
+<!--     <section class="top-letest-product-section">
         <div class="container">
             <div class="section-title">
                 <h2>NEW ARRIVALS</h2>
@@ -151,7 +164,7 @@
                     <div class="pi-pic">
                         <a href="/product/{{$n->id_barang}}"><img src="{{ $n->image }}" alt=""></a>
                         <div class="pi-links">
-                            <a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+                            <a href="{{ url('addtocart/'.$n->id_barang) }}" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
                             <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
                         </div>
                     </div>
@@ -163,7 +176,7 @@
                 @endforeach
             </div>
         </div>
-    </section>
+    </section> -->
     <!-- letest product section end -->
 
 
@@ -171,22 +184,23 @@
     <section class="product-filter-section">
         <div class="container">
             <div class="section-title">
-                <h2>BROWSE TOP RENT PRODUCTS</h2>
+                <h2>ALL PRODUCT</h2>
             </div>
             <div class="row">
                 @foreach($Barang as $b)
+                
                 <div class="col-lg-3 col-sm-6">
                     <div class="product-item">
                         <div class="pi-pic">
-                            <a href="/product/{{$n->id_barang}}"><img src="{{ $b->image }}" alt=""></a>
+                            <a href="/product/{{$b->id_barang}}"><img src="{{ asset('storage/product/'.$b->image) }}" alt=""></a>
                             <div class="pi-links">
-                                <a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+                                <a href="{{ url('addtocart/'.$b->id_barang) }}" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
                                 <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
                             </div>
                         </div>
                         <div class="pi-text">
                             <h6>Rp {{ $b->harga }}</h6>
-                            <a href="/product/{{$n->id_barang}}"><p>{{ $b->namabarang }} </p></a>
+                            <a href="/product/{{$b->id_barang}}"><p>{{ $b->namabarang }} </p></a>
                         </div>
                     </div>
                 </div>

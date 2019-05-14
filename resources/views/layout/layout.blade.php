@@ -29,8 +29,10 @@
     <![endif]-->
 
 </head>
-<body>
+<body>  
+
 @yield('content')
+
 
 <!--====== Javascripts & Jquery ======-->
 <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>

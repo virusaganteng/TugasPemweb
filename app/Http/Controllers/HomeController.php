@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Barang;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -24,5 +26,48 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+    public function add(){
+        $join = DB::table('category')
+                // ->join('category', 'barang.id_category', '=', 'category.id_category')
+                ->select('category.*', 'category.namacategory')
+                ->get();                        
+        return view('add', ['join' => $join]);
+    }
+    public function addpost(Request $Request){
+        $validation = $Request->validate([
+            'namabarang' => 'required',
+            'id_category' => 'required',
+            'image' => 'required',
+            'deskripsi' => 'required',
+            'harga' => 'required',
+            'size' => 'required',
+            'stock' => 'required'
+        ]);
+
+        $namabarang = $Request->namabarang;
+        $id_category = $Request->id_category;
+        $image = $Request->file('image');
+        $deskripsi = $Request->deskripsi;
+        $harga = $Request->harga;
+        $size = $Request->size;
+        $stock = $Request->stock;
+        $name = 'haxor-' . time() . '.' . $image->getClientOriginalExtension();
+        $path = $image->storeAs('/public/product/', $name);
+
+        $input = Barang::create([
+            'namabarang' => $namabarang,
+            'id_category' => $id_category,
+            'image' =>  $name,
+            'deskripsi' => $deskripsi,
+            'harga' => $harga,
+            'size' => $size,
+            'jumlah' => $stock
+        ]);
+        if (!$input) {
+            echo "gagal!";
+        }
+        else return redirect()->back()->with('success','Barang ditambahkan!');
+        
     }
 }
