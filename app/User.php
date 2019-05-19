@@ -6,11 +6,12 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+
 class User extends Authenticatable
 {
 
-    use Notifiable;
-    
+    //use Notifiable;
+
     protected $primaryKey = 'id_customer';
     /**
      * The attributes that are mass assignable.
@@ -18,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'nama', 'notelp', 'alamat', 'email', 'password',
+        'nama', 'namatoko', 'notelp', 'alamat', 'email', 'password', 'role',
     ];
     protected $table = 'users';
     /**

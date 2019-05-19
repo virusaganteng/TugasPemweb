@@ -4,6 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use App\User;
+use Redirect;
+use DB;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -20,11 +25,33 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
+    public function login(Request $req)
+    {
+        //dd($req->all());
+        //return $check = User::where('email',$req->email)->get();
+        $email = User::where(DB::raw('email'),$req->email)->first();
+        //$email = DB::table('users')->where(DB::raw('email'),$req->email)->first();
+
+        if ($email && $email->password == md5($req->password)) {
+            Auth::login($email);
+            return redirect(url('/home'));
+        }else{
+
+            return Redirect::back()->withErrors(['Wrong Username / Password !']);
+        }
+    }
+
+    // use AuthenticatesUsers;
+
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+
+        return redirect('/');
+    }
+
     protected $redirectTo = '/home';
 
     /**

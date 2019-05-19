@@ -18,10 +18,13 @@ Route::get('/product/{id}', 'IndexController@product');
 Route::get('/cart', 'IndexController@cart');
 Route::get('/addtocart/{id}', 'IndexController@addtocart');
 Route::get('/apus', 'IndexController@apus');
-
+Route::get('/checkout', 'IndexController@checkout');
+Route::post('/addcheckout', 'IndexController@addcheckout');
+route::post('/checkoutproses', 'IndexController@checkoutproses');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/add', 'HomeController@add');
 Route::post('/addpost', 'HomeController@addpost')->name('addpost');
+Route::get('/orderdetail', 'HomeController@orderdetail');

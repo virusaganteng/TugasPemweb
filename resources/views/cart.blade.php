@@ -83,6 +83,17 @@
 					<div class="cart-table">
 					<!-- <input type="date" name=""> -->
 						<h3>Your Cart</h3>
+            <div class="form-group">
+              <form action="{{url('/addcheckout')}}" method="post">
+              {{ csrf_field() }}
+              <label for="sel1">Lama Sewa</label>
+              <select name="lamasewa" class="form-control" id="sel1">
+
+                <?php for ($i=1; $i <= 7; $i++) { ?>
+                <option value="<?php echo $i; ?>"><?php echo $i . " Hari"; ?></option>
+                <?php } ?>
+              </select>
+            </div>
 						<div class="cart-table-warp">
 							<table>
 							<thead>
@@ -108,9 +119,10 @@
 									</td>
 									<td class="quy-col">
 										<div class="quantity">
-					                        <div class="pro-qty">
-												<input type="text" value="{{ $details['qty'] }}">
-											</div>
+					                        <!-- <div class="pro-qty"> -->
+												<!-- <input type="text" value="{{ $details['qty'] }}"> -->
+                        {{ $details['qty'] }}
+											<!-- </div> -->
                     					</div>
 									</td>
 									<td class="size-col"><h4>{{ $details['size'] }}</h4></td>
@@ -122,18 +134,16 @@
 						</table>
 						</div>
 						<div class="total-cost">
-							<h6>Total <span>{{ $total }}</span></h6>
+							<!-- <h6>Total <span>{{ $total }}</span></h6> -->
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-4 card-right">
-					<form class="promo-code-form">
-						<input type="text" placeholder="Enter promo code">
-						<button>Submit</button>
-					</form>
+
 					@if (Route::has('login'))
 					@auth
-					<a href="/checkout" class="site-btn">Proceed to checkout</a>
+          <!-- <button type="submit" class="site-btn">Proceed cok</button> -->
+					<button class="site-btn">Proceed to checkout</button>
 					<a href="{{ url('/apus') }}" class="site-btn sb-dark">Continue shopping</a>
 					@else
 					<a href="{{ url('/login') }}" class="site-btn sb-dark">Login to Checkout</a>
@@ -143,6 +153,7 @@
 				</div>
 			</div>
 		</div>
+  </form>
 	</section>
 	<!-- cart section end -->
 
@@ -162,7 +173,7 @@
 					<a href="" class="tumblr"><i class="fa fa-tumblr-square"></i><span>tumblr</span></a>
 				</div>
 
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --> 
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 <p class="text-white text-center mt-5">Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 
@@ -182,3 +193,4 @@
 	<script src="js/jquery.zoom.min.js"></script>
 	<script src="js/jquery-ui.min.js"></script>
 	<script src="js/main.js"></script>
+  @endsection

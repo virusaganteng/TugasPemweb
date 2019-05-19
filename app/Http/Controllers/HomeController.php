@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Barang;
 use Illuminate\Support\Facades\DB;
+use Auth;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -69,5 +71,13 @@ class HomeController extends Controller
         }
         else return redirect()->back()->with('success','Barang ditambahkan!');
         
+    }
+    public function orderdetail(){
+        $table = DB::table('order')
+        ->select('*')
+        ->leftJoin('payment', 'order.id_payment', '=', 'payment.id_payment')
+        ->where('id_customer', Auth::User()->id_customer)
+        ->get();
+        return view('orderdetail', ['table' => $table]);
     }
 }

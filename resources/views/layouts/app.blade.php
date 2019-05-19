@@ -40,7 +40,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="">MENU 2</a>
-                        </li>   -->                      
+                        </li>   -->
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -56,6 +56,36 @@
                                 </li>
                             @endif
                         @else
+                        @if(Auth::User()->role==2)
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                MENU <span class="caret"></span>
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/add">
+                                    Add Barang
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    Kelola Barang
+                                </a>
+
+                            </div>
+                          @elseif(Auth::User()->role==3)
+                          <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                MENU <span class="caret"></span>
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/orderdetail">
+                                    Order Detail
+                                </a>
+
+                            </div>
+                            @endif
+
+                        </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->nama }} <span class="caret"></span>

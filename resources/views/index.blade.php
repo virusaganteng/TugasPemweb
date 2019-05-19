@@ -3,6 +3,7 @@
 @section('title','GOCAMP')
 
 @section('content')
+
 @if (session('success'))
     <div class="alert alert-success">
         {{ session('success') }}
@@ -188,7 +189,7 @@
             </div>
             <div class="row">
                 @foreach($Barang as $b)
-                
+
                 <div class="col-lg-3 col-sm-6">
                     <div class="product-item">
                         <div class="pi-pic">
@@ -301,3 +302,4 @@
         </div>
     </section>
     <!-- Footer section end -->
+@endsection

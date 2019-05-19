@@ -55,6 +55,7 @@ class RegisterController extends Controller
             'alamat' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'role' => ['required'],
         ]);
     }
 
@@ -71,7 +72,8 @@ class RegisterController extends Controller
             'notelp' => $data['notelp'],
             'alamat' => $data['alamat'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'password' => md5($data['password']),
+            'role' => $data['role'],
         ]);
     }
 }
