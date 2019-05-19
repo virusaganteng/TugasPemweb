@@ -31,6 +31,10 @@ class IndexController extends Controller
     	return view('/cart');
     }
     public function addtocart($id){
+      if (Auth::User() == null) {
+       return redirect('/login');
+      }
+      else {
       $cust = Auth::User()->id_customer;
     	$Barang = Barang::find($id);
     	if (!$Barang) {
@@ -73,6 +77,7 @@ class IndexController extends Controller
     	];
     	session()->put('cart',$cart);
     	return redirect()->back()->with('succes','Produk telah ditambahkan!');
+      }
     }
     public function apus(){
     	session()->forget('cart');

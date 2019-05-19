@@ -28,9 +28,12 @@
     </tr>
   </thead>
   <tbody>
+  
+  
+    @foreach($table as $index => $table)
+  
     <tr>
-      @foreach($table as $table)
-      <th scope="row">1</th>
+      <th scope="row">{{$index+1}}</th>
       <td>{{$table->id_order}}</td>
       <td>{{$table->tipepembayaran . " " . $table->norek}}</td>
       <td>{{ $table->alamat }}</td>
@@ -39,8 +42,8 @@
       <td>{{$table->tanggalsewa}}</td>
       <td>{{$table->tanggalkembali}}</td>
       <td>{{"Rp ". $table->jumlahbayar}}</td>
-      @endforeach
     </tr>
+    @endforeach
   </tbody>
 </table>
             </div>
