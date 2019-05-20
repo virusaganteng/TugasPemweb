@@ -47,6 +47,7 @@ class HomeController extends Controller
             'stock' => 'required'
         ]);
 
+        $id_customer = $Request->id_customer;
         $namabarang = $Request->namabarang;
         $id_category = $Request->id_category;
         $image = $Request->file('image');
@@ -64,7 +65,8 @@ class HomeController extends Controller
             'deskripsi' => $deskripsi,
             'harga' => $harga,
             'size' => $size,
-            'jumlah' => $stock
+            'jumlah' => $stock,
+            'id_customer' => $id_customer
         ]);
         if (!$input) {
             echo "gagal!";
@@ -79,5 +81,16 @@ class HomeController extends Controller
         ->where('id_customer', Auth::User()->id_customer)
         ->get();
         return view('orderdetail', ['table' => $table]);
+    }
+    public function kelola(){
+        $table = DB::table('barang')
+            ->select('*')
+            ->where('id_customer', Auth::User()->id_customer)
+            ->get();
+        return view('kelola', ['table' => $table]);
+    }
+    public function delete($id){
+        Barang::where('id_barang',$id)->delete();
+        return redirect('kelola');
     }
 }

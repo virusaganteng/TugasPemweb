@@ -27,4 +27,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/add', 'HomeController@add');
 Route::post('/addpost', 'HomeController@addpost')->name('addpost');
+Route::get('/kelola', 'HomeController@kelola');
 Route::get('/orderdetail', 'HomeController@orderdetail');
+Route::get('/contact', function(){
+	return view('contact');
+});
+Route::get('/delete/{id}', 'HomeController@delete');

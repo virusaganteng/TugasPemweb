@@ -66,7 +66,7 @@
                                 <a class="dropdown-item" href="/add">
                                     Add Barang
                                 </a>
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="/kelola">
                                     Kelola Barang
                                 </a>
 

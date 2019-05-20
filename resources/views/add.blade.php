@@ -16,6 +16,7 @@
                <form method="POST" enctype="multipart/form-data" action="{{ route('addpost') }}">
                 {{ csrf_field() }}
                    <div class="form-group">
+                    <input type="hidden" name="id_customer" value="{{ Auth::User()->id_customer }}">
                     <label class="NamaBarang">Nama Barang</label>
                     <input type="text" class="form-control" name="namabarang" id="NamaBarang" placeholder="Product" name="">
                     <label class="Category">Category</label>
